@@ -2,7 +2,8 @@ import hashlib
 import shutil
 import glob
 import os
-from tkinter import image_names
+import time
+from tracemalloc import start
 
 from constants import SOURCE_FILE_PATH, DESTINATION_FILE_PATH, USB_DRIVE_CODE
 from os import listdir
@@ -50,7 +51,11 @@ def locate_scan_folders():
     return (list(locations_set))
 
 def make_copies():
+    start_time = time.time()
     for loc in sorted(locate_scan_folders()):
         check_images(loc)
+    end_time = time.time()
+    duration = end_time - start_time
+    print(f"durration: {duration}")
 
 make_copies()
